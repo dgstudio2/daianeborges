@@ -133,33 +133,22 @@ function Hero() {
   );
 }
 
-function IntroBand() {
-  return (
-    <section className="border-b border-[#d68c80]/35 bg-[#0d0a0d] py-9 text-[#f9eee7]">
-      <div className="gb-shell flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-        <p className="gb-display max-w-2xl text-2xl leading-tight md:text-3xl">Mais do que se olhar. <em>Sentir-se.</em></p>
-        <p className="max-w-[300px] text-xs leading-5 text-[#c9a8a5]">Uma curadoria de beleza feita de detalhes, escuta e presença.</p>
-      </div>
-    </section>
-  );
-}
-
 function Services({ onSelect }: { onSelect: (service: string) => void }) {
   return (
-    <section id="servicos" className="scroll-mt-6 bg-[#24161d] py-24 md:py-32">
+    <section id="servicos" className="scroll-mt-6 bg-[#24161d] py-20 md:py-24">
       <div className="gb-shell">
-        <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <SectionHeading eyebrow="01 / Serviços" title={<>Um cuidado que<br /><em className="text-[#df9587]">tem a sua medida.</em></>} copy="Cada serviço começa com uma conversa. O resultado é pensado para você, não para uma tendência." />
           <p className="max-w-[180px] text-right font-mono text-[10px] uppercase leading-5 tracking-[.12em] text-[#a99594]">Deslize para descobrir<br />o seu próximo ritual</p>
         </div>
-        <div className="mt-14 grid border-t border-[#f9eee7]/15 md:grid-cols-2">
+        <div className="mt-10 grid border-t border-[#f9eee7]/15 md:grid-cols-2">
           {SERVICES.map((service) => (
-            <article key={service.id} className="group flex min-h-[210px] flex-col justify-between border-b border-[#f9eee7]/15 py-7 md:min-h-[245px] md:px-8 md:py-9 md:odd:border-r">
+            <article key={service.id} className="group flex min-h-[180px] flex-col justify-between border-b border-[#f9eee7]/15 py-6 md:min-h-[205px] md:px-8 md:py-7 md:odd:border-r">
               <div className="flex items-start justify-between gap-5">
                 <span className="font-mono text-[10px] tracking-[.1em] text-[#d68c80]">{service.number}</span>
                 <span className="font-mono text-[9px] uppercase tracking-[.13em] text-[#a99594]">{service.detail}</span>
               </div>
-              <div className="mt-9 flex items-end justify-between gap-6">
+              <div className="mt-6 flex items-end justify-between gap-6">
                 <div>
                   <h3 className="gb-display text-3xl text-[#f9eee7]">{service.title}</h3>
                   <p className="mt-3 max-w-[370px] text-sm leading-6 text-[#b9a4a0]">{service.description}</p>
@@ -176,17 +165,17 @@ function Services({ onSelect }: { onSelect: (service: string) => void }) {
 
 function MegaHair({ onSelect }: { onSelect: (service: string) => void }) {
   return (
-    <section id="mega-hair" className="scroll-mt-6 bg-[#100c10] py-20 text-[#f9eee7] md:py-28">
-      <div className="gb-shell grid items-center gap-12 md:grid-cols-[.9fr_1.1fr] md:gap-20">
+    <section id="mega-hair" className="scroll-mt-6 bg-[#100c10] py-16 text-[#f9eee7] md:py-20">
+      <div className="gb-shell grid items-center gap-10 md:grid-cols-[.9fr_1.1fr] md:gap-16">
         <div className="relative order-2 md:order-1">
           <div className="absolute -left-4 -top-4 h-full w-full border border-[#b86665]/30 md:-left-7 md:-top-7" />
-          <img src="/images/mega-hair.jpg" alt="Detalhe de fios longos com reflexos quentes" className="relative h-[360px] w-full object-cover md:h-[560px]" />
+          <img src="/images/mega-hair.jpg" alt="Detalhe de fios longos com reflexos quentes" className="relative h-[300px] w-full object-cover md:h-[460px]" />
           <span className="absolute -bottom-5 -right-4 flex h-24 w-24 items-center justify-center rounded-full border border-[#d68c80]/55 bg-[#100c10] text-center font-mono text-[9px] uppercase leading-4 tracking-[.1em] text-[#df9587] md:-right-8">O seu<br />novo<br />movimento</span>
         </div>
         <div className="order-1 md:order-2">
           <p className="gb-eyebrow text-[#df9587]">02 / A experiência Gente Bonita</p>
           <h2 className="gb-display mt-5 text-5xl leading-[.95] md:text-7xl">Cabelos que<br /><em className="text-[#a75b58]">contam você.</em></h2>
-          <p className="mt-8 max-w-[480px] text-[15px] leading-7 text-[#c9b5b3]">Mega Hair para transformar o espelho sem perder a naturalidade. A escolha dos fios, a técnica e o acabamento são pensados para que o resultado pareça — e se sinta — seu.</p>
+          <p className="mt-6 max-w-[480px] text-[15px] leading-7 text-[#c9b5b3]">Mega Hair para transformar o espelho sem perder a naturalidade. A escolha dos fios, a técnica e o acabamento são pensados para que o resultado pareça — e se sinta — seu.</p>
           <p className="mt-5 max-w-[480px] text-[15px] leading-7 text-[#c9b5b3]">Um novo comprimento. Um novo movimento. A mesma você, mais extraordinária.</p>
           <button type="button" onClick={() => onSelect('Mega Hair')} className="gb-button mt-9 border-[#df9587] text-[#df9587] hover:bg-[#df9587] hover:text-[#100c10]" data-testid="button-mega-hair-booking">Conversar sobre Mega Hair <ArrowUpRight size={16} /></button>
         </div>
@@ -197,19 +186,19 @@ function MegaHair({ onSelect }: { onSelect: (service: string) => void }) {
 
 function About() {
   return (
-    <section id="sobre" className="scroll-mt-6 bg-[#342028] py-24 md:py-32">
-      <div className="gb-shell grid gap-14 md:grid-cols-[.8fr_1.2fr] md:gap-24">
+    <section id="sobre" className="scroll-mt-6 bg-[#342028] py-20 md:py-24">
+      <div className="gb-shell grid gap-10 md:grid-cols-[.8fr_1.2fr] md:gap-16">
         <div>
           <p className="gb-eyebrow">03 / O atelier</p>
-          <div className="mt-10 flex items-center gap-4 text-[#d68c80]"><span className="h-px w-12 bg-[#d68c80]" /><span className="font-mono text-[10px] uppercase tracking-[.18em]">Gente Bonita</span></div>
+          <div className="mt-7 flex items-center gap-4 text-[#d68c80]"><span className="h-px w-12 bg-[#d68c80]" /><span className="font-mono text-[10px] uppercase tracking-[.18em]">Gente Bonita</span></div>
         </div>
         <div>
           <h2 className="gb-display text-4xl leading-[1.03] text-[#f9eee7] md:text-6xl">Aqui, o cuidado não é uma etapa.<br /><em className="text-[#df9587]">É a experiência inteira.</em></h2>
-          <div className="mt-10 grid gap-8 border-t border-[#f9eee7]/15 pt-8 md:grid-cols-2">
+          <div className="mt-8 grid gap-6 border-t border-[#f9eee7]/15 pt-7 md:grid-cols-2">
             <p className="text-[15px] leading-7 text-[#d1bbb6]">Gente Bonita nasceu para ser um lugar de pausa. Um atelier onde cada detalhe — do primeiro olhar ao último toque — existe para lembrar você da sua própria beleza.</p>
             <p className="text-[15px] leading-7 text-[#d1bbb6]">Não acreditamos em transformações que apagam quem você é. Acreditamos em escutar, interpretar e criar uma beleza que tenha a sua assinatura.</p>
           </div>
-          <div className="mt-10 flex items-center gap-4 text-xs text-[#a99594]"><Sparkles size={17} className="text-[#d68c80]" /><span>Um espaço íntimo para você se escolher de novo.</span></div>
+          <div className="mt-7 flex items-center gap-4 text-xs text-[#a99594]"><Sparkles size={17} className="text-[#d68c80]" /><span>Um espaço íntimo para você se escolher de novo.</span></div>
         </div>
       </div>
     </section>
@@ -218,13 +207,13 @@ function About() {
 
 function Gallery() {
   return (
-    <section id="galeria" className="scroll-mt-6 bg-[#24161d] py-24 md:py-32">
+    <section id="galeria" className="scroll-mt-6 bg-[#24161d] py-20 md:py-24">
       <div className="gb-shell">
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <SectionHeading eyebrow="04 / Galeria" title={<>A beleza<br /><em className="text-[#df9587]">em detalhes.</em></>} />
           <p className="max-w-[230px] text-sm leading-6 text-[#a99594]">Uma seleção visual do universo Gente Bonita. <span className="text-[#d68c80]">Em atualização.</span></p>
         </div>
-        <div className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-5">
+        <div className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-5">
           {GALLERY_ITEMS.map((item, index) => (
             <figure key={item.label} className={`group relative overflow-hidden ${index === 0 ? 'col-span-2 row-span-2 aspect-[.9] md:aspect-[.8]' : index === 1 ? 'col-span-2 aspect-[1.3] md:col-span-1 md:row-span-2 md:aspect-[.7]' : 'aspect-square'}`}>
               <img src={item.src} alt={item.alt} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
@@ -238,20 +227,44 @@ function Gallery() {
   );
 }
 
-function Booking({ selectedService, onClearSelection }: { selectedService: string; onClearSelection: () => void }) {
-  const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ name: '', whatsapp: '', service: selectedService, professional: '', date: '', time: '', observations: '' });
+type BookingForm = {
+  name: string;
+  whatsapp: string;
+  services: string[];
+  professional: string;
+  date: string;
+  time: string;
+  observations: string;
+};
 
-  function updateField(field: keyof typeof form, value: string) {
+function Booking({ selectedServices, onClearSelection }: { selectedServices: string[]; onClearSelection: () => void }) {
+  const [submitted, setSubmitted] = useState(false);
+  const [serviceError, setServiceError] = useState(false);
+  const [form, setForm] = useState<BookingForm>({ name: '', whatsapp: '', services: selectedServices, professional: '', date: '', time: '', observations: '' });
+
+  function updateField(field: Exclude<keyof BookingForm, 'services'>, value: string) {
     setForm((current) => ({ ...current, [field]: value }));
+  }
+  function toggleService(service: string) {
+    setServiceError(false);
+    setForm((current) => ({
+      ...current,
+      services: current.services.includes(service)
+        ? current.services.filter((item) => item !== service)
+        : [...current.services, service],
+    }));
   }
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (form.services.length === 0) {
+      setServiceError(true);
+      return;
+    }
     setSubmitted(true);
   }
   if (submitted) {
     return (
-      <section id="agendamento" className="scroll-mt-6 bg-[#d68c80] py-24 text-[#24161d] md:py-32">
+      <section id="agendamento" className="scroll-mt-6 bg-[#d68c80] py-20 text-[#24161d] md:py-24">
         <div className="gb-shell">
           <div className="mx-auto max-w-2xl text-center">
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-[#24161d]/35"><Check size={26} /></div>
@@ -265,13 +278,13 @@ function Booking({ selectedService, onClearSelection }: { selectedService: strin
     );
   }
   return (
-    <section id="agendamento" className="scroll-mt-6 bg-[#d68c80] py-24 text-[#24161d] md:py-32">
-      <div className="gb-shell grid gap-14 md:grid-cols-[.8fr_1.2fr] md:gap-24">
+    <section id="agendamento" className="scroll-mt-6 bg-[#d68c80] py-20 text-[#24161d] md:py-24">
+      <div className="gb-shell grid gap-10 md:grid-cols-[.8fr_1.2fr] md:gap-16">
         <div>
         <p className="gb-eyebrow text-[#754447]">05 / Agendamento</p>
           <h2 className="gb-display mt-6 text-5xl leading-[.92] md:text-7xl">Vamos reservar<br /><em>um tempo<br />para você?</em></h2>
-          <p className="mt-7 max-w-sm text-sm leading-6 text-[#5d3639]">Preencha o formulário e conte um pouco do que você deseja. Este é um pedido de horário — a confirmação acontece depois, pelo WhatsApp.</p>
-          <div className="mt-10 flex items-center gap-3 border-t border-[#24161d]/20 pt-5 text-xs text-[#5d3639]"><Clock3 size={16} /><span>{CONTACTS.hours}</span></div>
+          <p className="mt-6 max-w-sm text-sm leading-6 text-[#5d3639]">Preencha o formulário e conte um pouco do que você deseja. Este é um pedido de horário — a confirmação acontece depois, pelo WhatsApp.</p>
+          <div className="mt-7 flex items-center gap-3 border-t border-[#24161d]/20 pt-5 text-xs text-[#5d3639]"><Clock3 size={16} /><span>{CONTACTS.hours}</span></div>
         </div>
         <form onSubmit={submit} className="grid gap-5" data-testid="form-booking">
           <div className="grid gap-5 sm:grid-cols-2">
@@ -279,7 +292,22 @@ function Booking({ selectedService, onClearSelection }: { selectedService: strin
             <label><span className="gb-input-label text-[#754447]">WhatsApp</span><input required value={form.whatsapp} onChange={(event) => updateField('whatsapp', event.target.value)} className="gb-field border-[#7b494b]/35 bg-[#f2d9d0]/40 text-[#24161d] placeholder:text-[#81585a]" placeholder="(00) 00000-0000" data-testid="input-booking-whatsapp" /></label>
           </div>
           <div className="grid gap-5 sm:grid-cols-2">
-            <label><span className="gb-input-label text-[#754447]">Serviço desejado</span><select required value={form.service} onChange={(event) => updateField('service', event.target.value)} className="gb-field border-[#7b494b]/35 bg-[#f2d9d0]/40 text-[#24161d]" data-testid="select-booking-service"><option value="">Escolha um serviço</option>{SERVICES.map((service) => <option key={service.id} value={service.title}>{service.title}</option>)}</select></label>
+            <div>
+              <span className="gb-input-label text-[#754447]">Serviços desejados <span className="normal-case tracking-normal text-[#8b5b5d]">· escolha quantos quiser</span></span>
+              <div className="grid grid-cols-2 gap-2 sm:grid-cols-3" role="group" aria-label="Serviços desejados">
+                {SERVICES.map((service) => {
+                  const selected = form.services.includes(service.title);
+                  return (
+                    <label key={service.id} className={`gb-service-choice ${selected ? 'gb-service-choice-selected' : ''}`}>
+                      <input type="checkbox" checked={selected} onChange={() => toggleService(service.title)} className="sr-only" data-testid={`checkbox-booking-service-${service.id}`} />
+                      <span>{service.title}</span>
+                      {selected && <Check size={14} />}
+                    </label>
+                  );
+                })}
+              </div>
+              {serviceError && <p className="mt-2 text-xs text-[#713e42]" role="alert">Escolha pelo menos um serviço para continuar.</p>}
+            </div>
             <label><span className="gb-input-label text-[#754447]">Profissional (opcional)</span><select value={form.professional} onChange={(event) => updateField('professional', event.target.value)} className="gb-field border-[#7b494b]/35 bg-[#f2d9d0]/40 text-[#24161d]" data-testid="select-booking-professional"><option value="">Escolha uma opção</option>{PROFESSIONALS.map((professional) => <option key={professional} value={professional}>{professional}</option>)}</select></label>
           </div>
           <div className="grid gap-5 sm:grid-cols-2">
@@ -296,7 +324,7 @@ function Booking({ selectedService, onClearSelection }: { selectedService: strin
 
 function InstagramCta() {
   return (
-    <section id="instagram" className="scroll-mt-6 bg-[#24161d] py-24 md:py-28">
+    <section id="instagram" className="scroll-mt-6 bg-[#24161d] py-20 md:py-24">
       <div className="gb-shell relative overflow-hidden border border-[#f9eee7]/15 px-7 py-14 md:px-16 md:py-20">
         <div className="absolute -right-10 -top-24 h-72 w-72 rounded-full border border-[#d68c80]/20 md:h-96 md:w-96" />
         <div className="absolute -right-2 -top-16 h-56 w-56 rounded-full border border-[#d68c80]/15 md:h-80 md:w-80" />
@@ -327,9 +355,9 @@ function Footer() {
 }
 
 function Home() {
-  const [selectedService, setSelectedService] = useState('');
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
   function selectService(service: string) {
-    setSelectedService(service);
+    setSelectedServices((current) => current.includes(service) ? current : [...current, service]);
     document.getElementById('agendamento')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     window.history.replaceState(null, '', '#agendamento');
   }
@@ -338,12 +366,11 @@ function Home() {
       <Header />
       <main>
         <Hero />
-        <IntroBand />
         <Services onSelect={selectService} />
         <MegaHair onSelect={selectService} />
         <About />
         <Gallery />
-        <Booking key={selectedService} selectedService={selectedService} onClearSelection={() => setSelectedService('')} />
+        <Booking key={selectedServices.join('|')} selectedServices={selectedServices} onClearSelection={() => setSelectedServices([])} />
         <InstagramCta />
       </main>
       <a href={`https://wa.me/${CONTACTS.whatsappNumber}`} target="_blank" rel="noreferrer" className="gb-whatsapp gb-button" aria-label="Conversar pelo WhatsApp" data-testid="link-floating-whatsapp"><MessageCircle size={19} /><span>Falar no WhatsApp</span></a>
