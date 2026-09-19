@@ -1,0 +1,296 @@
+Crie um site profissional, sofisticado e luxuoso para um salão de beleza chamado “Gente Bonita”.
+
+IDENTIDADE DA MARCA
+
+A marca deve transmitir:
+
+- Luxo
+- Beleza
+- Feminilidade
+- Exclusividade
+- Sofisticação
+- Autoestima
+- Cuidado e experiência premium
+
+Use como identidade principal as cores preto e rosa, com detalhes em rosa sofisticado/rosé, branco e pequenos elementos dourados apenas como complemento. O preto deve transmitir luxo e o rosa deve trazer feminilidade e personalidade à marca.
+
+O design precisa parecer de um salão premium, evitando aparência genérica de template.
+
+PÁGINA INICIAL
+
+Crie uma seção Hero impactante logo no início.
+
+Nome da marca:
+GENTE BONITA
+
+Frase principal:
+“Sua beleza merece uma experiência extraordinária.”
+
+Texto complementar:
+“Realçamos sua beleza com técnicas especializadas, atendimento personalizado e uma experiência pensada para fazer você se sentir ainda mais bonita.”
+
+Adicionar dois botões de destaque:
+“AGENDAR MEU HORÁRIO”
+e
+“CONHECER NOSSOS SERVIÇOS”
+
+O botão de agendamento deve ser muito visível e levar diretamente para a área de agendamento.
+
+Use uma imagem de fundo elegante relacionada a salão de beleza, cabelo e estética feminina, com iluminação sofisticada e sobreposição escura para manter a identidade preta e rosa.
+
+SERVIÇOS
+
+Criar uma seção chamada:
+
+“Tudo para você se sentir Gente Bonita.”
+
+Apresente os principais serviços em cards elegantes, com imagens grandes, animações sutis e descrição curta.
+
+Serviços:
+
+1. MEGA HAIR
+   Destaque o Mega Hair como o principal serviço do salão.
+   Texto: “Transforme seu visual com cabelos longos, volumosos e naturais, utilizando técnicas profissionais e acabamento impecável.”
+
+2. CABELOS
+   “Cortes, tratamentos, escovas, coloração e cuidados personalizados para deixar seus cabelos ainda mais incríveis.”
+
+3. CÍLIOS
+   “Realce seu olhar com técnicas profissionais de extensão e valorização dos cílios.”
+
+4. SOBRANCELHAS
+   “Design e cuidados personalizados para harmonizar seu olhar e valorizar seus traços.”
+
+5. MAKE
+   “Produções sofisticadas para eventos, ocasiões especiais ou simplesmente para você se sentir maravilhosa.”
+
+O card de MEGA HAIR deve ter maior destaque visual que os demais, deixando claro que é um dos grandes diferenciais da marca.
+
+SEÇÃO DE DESTAQUE DO MEGA HAIR
+
+Criar uma seção exclusiva e visualmente impactante para Mega Hair.
+
+Título:
+“Seu cabelo. Sua transformação.”
+
+Texto:
+“Descubra o poder de uma transformação que combina naturalidade, sofisticação e autoestima.”
+
+Adicionar botão:
+“QUERO AGENDAR MEU MEGA HAIR”
+
+Criar um layout dividido com uma imagem luxuosa de cabelo feminino de um lado e conteúdo do outro.
+
+SOBRE O SALÃO
+
+Criar uma seção:
+
+“Mais do que beleza. Uma experiência Gente Bonita.”
+
+Apresente o salão como uma marca de beleza premium, focada em atendimento, qualidade, confiança e transformação.
+
+Texto sugerido:
+
+“No Gente Bonita, acreditamos que cuidar da beleza vai muito além do resultado final. Cada detalhe foi pensado para proporcionar uma experiência especial, desde o primeiro atendimento até o momento em que você se olha no espelho e se sente ainda mais incrível.”
+
+Adicionar números ou pequenos destaques, como:
+
+Atendimento personalizado
+Profissionais especializados
+Experiência premium
+Beleza que valoriza você
+
+Não invente números de clientes, anos de experiência ou certificações. Deixe esses dados preparados para serem preenchidos posteriormente.
+
+GALERIA
+
+Criar uma galeria visual sofisticada com fotos de:
+
+- Mega Hair
+- Cabelos
+- Cílios
+- Sobrancelhas
+- Maquiagem
+- Ambiente do salão
+
+Usar um layout estilo Instagram/Pinterest, elegante e moderno.
+
+Adicionar efeito suave ao passar o mouse.
+
+DEPOIMENTOS
+
+Criar uma seção:
+
+“Elas amaram. Você também vai amar.”
+
+Adicionar cards para depoimentos de clientes.
+
+Como ainda não existem depoimentos reais fornecidos, NÃO invente avaliações ou nomes. Use espaços demonstrativos claramente identificados para que eu possa substituir depois.
+
+AGENDAMENTO
+
+Criar uma área de agendamento muito fácil de usar.
+
+Título:
+
+“Seu próximo momento de beleza começa aqui.”
+
+Criar um formulário com:
+
+- Nome
+- WhatsApp
+- Serviço desejado
+- Profissional (opcional)
+- Data
+- Horário
+- Observações
+
+Serviços disponíveis:
+
+- Mega Hair
+- Cabelos
+- Cílios
+- Sobrancelhas
+- Make
+
+Adicionar botão:
+“SOLICITAR AGENDAMENTO”
+
+Depois do envio, mostrar uma mensagem elegante:
+
+“Seu pedido de agendamento foi enviado! Em breve entraremos em contato para confirmar seu horário.”
+
+Preparar a estrutura para futura integração com WhatsApp, Google Calendar ou sistema de agenda.
+
+WHATSAPP
+
+Adicionar um botão flutuante de WhatsApp no canto inferior da tela.
+
+Texto do botão:
+“Agende pelo WhatsApp”
+
+Deixar o número configurável em um único local no código, para que eu possa colocar o número do salão posteriormente.
+
+INSTAGRAM
+
+Criar uma seção para Instagram com o título:
+
+“Siga a Gente Bonita”
+
+Adicionar espaço para o @Instagram do salão e uma galeria de fotos.
+
+Deixar o link do Instagram configurável.
+
+RODAPÉ
+
+Criar um footer premium contendo:
+
+GENTE BONITA
+“Beleza, autoestima e sofisticação em cada detalhe.”
+
+Links:
+
+- Início
+- Serviços
+- Mega Hair
+- Sobre
+- Galeria
+- Agendamento
+- Instagram
+- WhatsApp
+
+Adicionar espaço para:
+
+- Endereço
+- Horário de funcionamento
+- WhatsApp
+- Instagram
+
+Não inventar informações. Usar placeholders fáceis de editar.
+
+DESIGN
+
+O design deve ser extremamente elegante e moderno.
+
+Paleta:
+
+- Preto profundo
+- Preto sofisticado
+- Rosa elegante/rosé
+- Branco
+- Pequenos detalhes dourados
+
+Utilizar bastante espaço negativo, tipografia sofisticada, imagens grandes e composição editorial.
+
+Evitar:
+
+- Visual infantil
+- Rosa muito chamativo
+- Excesso de elementos
+- Gradientes exagerados
+- Aparência de template barato
+- Muitos textos
+- Ícones genéricos em excesso
+
+Utilizar:
+
+- Animações suaves
+- Transições elegantes
+- Efeitos de hover
+- Scroll animations discretas
+- Cards sofisticados
+- Bordas finas
+- Sombras suaves
+- Tipografia premium
+
+RESPONSIVIDADE
+
+O site precisa funcionar perfeitamente em:
+
+- Celular
+- Tablet
+- Notebook
+- Desktop
+
+No celular, o botão de agendamento deve ficar facilmente acessível.
+
+Criar menu mobile elegante.
+
+TECNOLOGIA
+
+Construa o projeto com código organizado, profissional e fácil de editar.
+
+Separar componentes, estilos e dados sempre que possível.
+
+Deixar textos, cores, links do Instagram, WhatsApp, endereço e horários facilmente editáveis.
+
+O projeto deve estar pronto para posteriormente conectar:
+
+- WhatsApp
+- Sistema real de agendamento
+- Banco de dados
+- Instagram
+- Google Calendar
+
+IMPORTANTE
+
+Priorize a imagem da marca e a sensação de luxo.
+
+O visitante deve entrar no site e imediatamente perceber que o Gente Bonita não é apenas um salão, mas uma marca de beleza premium.
+
+O Mega Hair deve ser o principal destaque comercial, mas os demais serviços também precisam ter presença forte.
+
+Crie o site completo, não apenas um protótipo visual. Gere todas as páginas, componentes, responsividade, navegação e interações necessárias.
+
+Antes de finalizar, revise o projeto para garantir que:
+
+1. Todos os botões funcionem.
+2. O menu funcione no celular.
+3. O formulário de agendamento funcione visualmente.
+4. Não existam links quebrados.
+5. Não sejam inventadas informações sobre o salão.
+6. O design seja consistente em todas as seções.
+7. A experiência no celular seja tão boa quanto no desktop.
+8. A identidade visual preto + rosa esteja presente em todo o site.
+9. O resultado tenha aparência de uma marca premium e sofisticada.
+10. O código esteja organizado e fácil de editar.

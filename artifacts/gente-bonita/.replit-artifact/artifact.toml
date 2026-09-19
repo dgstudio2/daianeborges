@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Gente Bonita"
+description = "Site premium para o salão Gente Bonita, com destaque para Mega Hair, serviços de beleza, galeria, agendamento e contato."
+version = "1.0.0"
+id = "artifacts/gente-bonita"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 26014
+
+[services.development]
+run = "pnpm --filter @workspace/gente-bonita run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/gente-bonita", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/gente-bonita/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "26014"
+BASE_PATH = "/"
