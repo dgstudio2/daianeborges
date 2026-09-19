@@ -53,7 +53,9 @@ function scrollToSection(href: string) {
 function BrandMark({ light = false }: { light?: boolean }) {
   return (
     <a href="#inicio" onClick={(event) => { event.preventDefault(); scrollToSection('#inicio'); }} className={`inline-flex items-center gap-3 ${light ? 'text-[#f9eee7]' : 'text-[#f9eee7]'}`} data-testid="link-brand">
-      <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#d68c80] text-[14px] font-serif italic text-[#e6a398]">G</span>
+      <span className="gb-logo-mark flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#d68c80]/70">
+        <img src="/images/gente-bonita-logo.jpg" alt="" className="h-[170%] w-[170%] max-w-none object-cover mix-blend-screen" />
+      </span>
       <span className="leading-none">
         <strong className="block text-[16px] font-medium tracking-[.13em]">GENTE</strong>
         <em className="block pt-1 text-[10px] not-italic tracking-[.32em] text-[#d68c80]">BONITA</em>
@@ -106,6 +108,8 @@ function Hero() {
   return (
     <section id="inicio" className="relative flex min-h-[740px] items-end overflow-hidden bg-[#24161d] pb-16 pt-32 md:min-h-[820px] md:pb-24">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_38%,rgba(185,93,85,.28),transparent_32%),linear-gradient(110deg,#24161d_8%,rgba(36,22,29,.82)_45%,rgba(36,22,29,.25)_100%)]" />
+      <div className="gb-luxe-glow absolute -left-24 top-24 h-72 w-72 rounded-full" />
+      <Sparkles className="gb-sparkle absolute right-[22%] top-[22%] h-5 w-5 text-[#e4a49a]" />
       <div className="absolute inset-y-0 right-0 w-full md:w-[58%]">
         <img src="/images/hero-beauty.jpg" alt="Mulher com cabelo acobreado em retrato editorial" className="h-full w-full object-cover object-[56%_center] opacity-90 mix-blend-screen" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#24161d] via-[#24161d]/45 to-transparent" />
@@ -131,10 +135,10 @@ function Hero() {
 
 function IntroBand() {
   return (
-    <section className="border-b border-[#e7b0a2]/15 bg-[#d68c80] py-9 text-[#24161d]">
+    <section className="border-b border-[#d68c80]/35 bg-[#0d0a0d] py-9 text-[#f9eee7]">
       <div className="gb-shell flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
         <p className="gb-display max-w-2xl text-2xl leading-tight md:text-3xl">Mais do que se olhar. <em>Sentir-se.</em></p>
-        <p className="max-w-[300px] text-xs leading-5 text-[#4a282c]">Uma curadoria de beleza feita de detalhes, escuta e presença.</p>
+        <p className="max-w-[300px] text-xs leading-5 text-[#c9a8a5]">Uma curadoria de beleza feita de detalhes, escuta e presença.</p>
       </div>
     </section>
   );
@@ -172,19 +176,19 @@ function Services({ onSelect }: { onSelect: (service: string) => void }) {
 
 function MegaHair({ onSelect }: { onSelect: (service: string) => void }) {
   return (
-    <section id="mega-hair" className="scroll-mt-6 bg-[#f2d9d0] py-20 text-[#24161d] md:py-28">
+    <section id="mega-hair" className="scroll-mt-6 bg-[#100c10] py-20 text-[#f9eee7] md:py-28">
       <div className="gb-shell grid items-center gap-12 md:grid-cols-[.9fr_1.1fr] md:gap-20">
         <div className="relative order-2 md:order-1">
           <div className="absolute -left-4 -top-4 h-full w-full border border-[#b86665]/30 md:-left-7 md:-top-7" />
           <img src="/images/mega-hair.jpg" alt="Detalhe de fios longos com reflexos quentes" className="relative h-[360px] w-full object-cover md:h-[560px]" />
-          <span className="absolute -bottom-5 -right-4 flex h-24 w-24 items-center justify-center rounded-full border border-[#b86665]/45 bg-[#f2d9d0] text-center font-mono text-[9px] uppercase leading-4 tracking-[.1em] text-[#804a4b] md:-right-8">O seu<br />novo<br />movimento</span>
+          <span className="absolute -bottom-5 -right-4 flex h-24 w-24 items-center justify-center rounded-full border border-[#d68c80]/55 bg-[#100c10] text-center font-mono text-[9px] uppercase leading-4 tracking-[.1em] text-[#df9587] md:-right-8">O seu<br />novo<br />movimento</span>
         </div>
         <div className="order-1 md:order-2">
-          <p className="gb-eyebrow text-[#955451]">02 / A experiência Gente Bonita</p>
+          <p className="gb-eyebrow text-[#df9587]">02 / A experiência Gente Bonita</p>
           <h2 className="gb-display mt-5 text-5xl leading-[.95] md:text-7xl">Cabelos que<br /><em className="text-[#a75b58]">contam você.</em></h2>
-          <p className="mt-8 max-w-[480px] text-[15px] leading-7 text-[#5b393b]">Mega Hair para transformar o espelho sem perder a naturalidade. A escolha dos fios, a técnica e o acabamento são pensados para que o resultado pareça — e se sinta — seu.</p>
-          <p className="mt-5 max-w-[480px] text-[15px] leading-7 text-[#5b393b]">Um novo comprimento. Um novo movimento. A mesma você, mais extraordinária.</p>
-          <button type="button" onClick={() => onSelect('Mega Hair')} className="gb-button mt-9 border-[#9f5b59] text-[#6d3f41] hover:bg-[#9f5b59] hover:text-[#f2d9d0]" data-testid="button-mega-hair-booking">Conversar sobre Mega Hair <ArrowUpRight size={16} /></button>
+          <p className="mt-8 max-w-[480px] text-[15px] leading-7 text-[#c9b5b3]">Mega Hair para transformar o espelho sem perder a naturalidade. A escolha dos fios, a técnica e o acabamento são pensados para que o resultado pareça — e se sinta — seu.</p>
+          <p className="mt-5 max-w-[480px] text-[15px] leading-7 text-[#c9b5b3]">Um novo comprimento. Um novo movimento. A mesma você, mais extraordinária.</p>
+          <button type="button" onClick={() => onSelect('Mega Hair')} className="gb-button mt-9 border-[#df9587] text-[#df9587] hover:bg-[#df9587] hover:text-[#100c10]" data-testid="button-mega-hair-booking">Conversar sobre Mega Hair <ArrowUpRight size={16} /></button>
         </div>
       </div>
     </section>
@@ -234,24 +238,6 @@ function Gallery() {
   );
 }
 
-function Testimonials() {
-  return (
-    <section id="depoimentos" className="scroll-mt-6 border-y border-[#f9eee7]/10 bg-[#342028] py-24 md:py-28">
-      <div className="gb-shell">
-        <SectionHeading eyebrow="05 / Depoimentos" title={<>Quando você se sente<br /><em className="text-[#df9587]">bonita, tudo muda.</em></>} copy="Este espaço será preenchido com histórias reais de mulheres que viveram a experiência Gente Bonita." />
-        <div className="mt-14 grid gap-4 md:grid-cols-3">
-          {['História em breve', 'Sua experiência aqui', 'Depoimento reservado'].map((label, index) => (
-            <article key={label} className="gb-card flex min-h-[210px] flex-col justify-between p-6 md:p-7" data-testid={`card-testimonial-placeholder-${index}`}>
-              <div className="flex justify-between text-[#d68c80]"><span className="font-serif text-3xl">“</span><span className="font-mono text-[10px]">0{index + 1}</span></div>
-              <div><p className="text-sm leading-6 text-[#b9a4a0]">Conteúdo reservado para um relato autêntico.</p><p className="mt-5 font-mono text-[9px] uppercase tracking-[.14em] text-[#d68c80]">{label}</p></div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Booking({ selectedService, onClearSelection }: { selectedService: string; onClearSelection: () => void }) {
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: '', whatsapp: '', service: selectedService, professional: '', date: '', time: '', observations: '' });
@@ -282,7 +268,7 @@ function Booking({ selectedService, onClearSelection }: { selectedService: strin
     <section id="agendamento" className="scroll-mt-6 bg-[#d68c80] py-24 text-[#24161d] md:py-32">
       <div className="gb-shell grid gap-14 md:grid-cols-[.8fr_1.2fr] md:gap-24">
         <div>
-          <p className="gb-eyebrow text-[#754447]">06 / Agendamento</p>
+        <p className="gb-eyebrow text-[#754447]">05 / Agendamento</p>
           <h2 className="gb-display mt-6 text-5xl leading-[.92] md:text-7xl">Vamos reservar<br /><em>um tempo<br />para você?</em></h2>
           <p className="mt-7 max-w-sm text-sm leading-6 text-[#5d3639]">Preencha o formulário e conte um pouco do que você deseja. Este é um pedido de horário — a confirmação acontece depois, pelo WhatsApp.</p>
           <div className="mt-10 flex items-center gap-3 border-t border-[#24161d]/20 pt-5 text-xs text-[#5d3639]"><Clock3 size={16} /><span>{CONTACTS.hours}</span></div>
@@ -315,7 +301,7 @@ function InstagramCta() {
         <div className="absolute -right-10 -top-24 h-72 w-72 rounded-full border border-[#d68c80]/20 md:h-96 md:w-96" />
         <div className="absolute -right-2 -top-16 h-56 w-56 rounded-full border border-[#d68c80]/15 md:h-80 md:w-80" />
         <div className="relative max-w-2xl">
-          <p className="gb-eyebrow">07 / Siga o gesto</p>
+          <p className="gb-eyebrow">06 / Siga o gesto</p>
           <h2 className="gb-display mt-5 text-5xl leading-[.95] text-[#f9eee7] md:text-7xl">Mais beleza<br /><em className="text-[#df9587]">por perto.</em></h2>
           <p className="mt-7 max-w-md text-sm leading-6 text-[#b9a4a0]">O universo Gente Bonita, os detalhes do atelier e inspirações para o seu próximo momento.</p>
           <a href={CONTACTS.instagramUrl} target="_blank" rel="noreferrer" className="gb-button gb-button-ghost mt-9" data-testid="link-instagram"><Instagram size={16} /> {CONTACTS.instagramHandle}</a>
@@ -357,7 +343,6 @@ function Home() {
         <MegaHair onSelect={selectService} />
         <About />
         <Gallery />
-        <Testimonials />
         <Booking key={selectedService} selectedService={selectedService} onClearSelection={() => setSelectedService('')} />
         <InstagramCta />
       </main>
