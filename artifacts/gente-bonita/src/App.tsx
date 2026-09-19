@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
-import { ArrowDown, ArrowUpRight, Check, ChevronRight, Clock3, Instagram, Menu, MessageCircle, Plus, Sparkles, X } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, Brush, Check, ChevronRight, Clock3, Crown, Eye, Gem, Instagram, Menu, MessageCircle, Palette, Scissors, Sparkles, X } from 'lucide-react';
 import NotFound from '@/pages/not-found';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 
@@ -27,12 +27,12 @@ const NAV_ITEMS = [
 ];
 
 const SERVICES = [
-  { id: 'corte', number: '01', title: 'Corte & styling', description: 'Um desenho pensado para acompanhar o seu ritmo e revelar a sua presença.', detail: 'Personalizado' },
-  { id: 'cor', number: '02', title: 'Cor & iluminação', description: 'Dimensões, reflexos e tons que conversam com a sua pele — nunca uma fórmula pronta.', detail: 'Sob consulta' },
-  { id: 'mega-hair', number: '03', title: 'Mega Hair', description: 'Comprimento e volume com acabamento natural, escolha cuidadosa e atenção a cada fio.', detail: 'Experiência autoral' },
-  { id: 'tratamentos', number: '04', title: 'Tratamentos', description: 'Rituais de cuidado para devolver movimento, toque e brilho ao cabelo.', detail: 'Ritual completo' },
-  { id: 'make', number: '05', title: 'Make & beleza', description: 'Beleza para ocasiões especiais ou para um dia que merece mais presença.', detail: 'Por ocasião' },
-  { id: 'noiva', number: '06', title: 'Noivas & ocasiões', description: 'Um momento inteiro desenhado ao seu redor, com calma e intenção.', detail: 'Projeto especial' },
+  { id: 'corte', number: '01', title: 'Corte & styling', description: 'Um desenho pensado para acompanhar o seu ritmo e revelar a sua presença.', detail: 'Personalizado', icon: Scissors },
+  { id: 'cor', number: '02', title: 'Cor & iluminação', description: 'Dimensões, reflexos e tons que conversam com a sua pele — nunca uma fórmula pronta.', detail: 'Sob consulta', icon: Palette },
+  { id: 'mega-hair', number: '03', title: 'Mega Hair', description: 'Comprimento e volume com acabamento natural, escolha cuidadosa e atenção a cada fio.', detail: 'Experiência autoral', icon: Gem },
+  { id: 'tratamentos', number: '04', title: 'Tratamentos', description: 'Rituais de cuidado para devolver movimento, toque e brilho ao cabelo.', detail: 'Ritual completo', icon: Sparkles },
+  { id: 'make', number: '05', title: 'Make & beleza', description: 'Beleza para ocasiões especiais ou para um dia que merece mais presença.', detail: 'Por ocasião', icon: Brush },
+  { id: 'noiva', number: '06', title: 'Noivas & ocasiões', description: 'Um momento inteiro desenhado ao seu redor, com calma e intenção.', detail: 'Projeto especial', icon: Crown },
 ];
 
 const GALLERY_ITEMS = [
@@ -91,7 +91,7 @@ function Header() {
         </button>
       </div>
       {open && (
-        <div className="gb-menu-panel border-b border-[#f9eee7]/15 bg-[#24161d] px-6 py-6 md:hidden">
+        <div className="gb-menu-panel border-b border-[#f9eee7]/15 bg-[#080709] px-6 py-6 md:hidden">
           <nav className="flex flex-col gap-5" aria-label="Navegação mobile">
             {NAV_ITEMS.map((item) => (
               <a key={item.href} href={item.href} onClick={(event) => { event.preventDefault(); setOpen(false); scrollToSection(item.href); }} className="text-sm uppercase tracking-[.14em] text-[#f9eee7]" data-testid={`link-mobile-${item.label.toLowerCase().replaceAll(' ', '-')}`}>{item.label}</a>
@@ -106,14 +106,14 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="inicio" className="relative flex min-h-[740px] items-end overflow-hidden bg-[#24161d] pb-16 pt-32 md:min-h-[820px] md:pb-24">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_38%,rgba(185,93,85,.28),transparent_32%),linear-gradient(110deg,#24161d_8%,rgba(36,22,29,.82)_45%,rgba(36,22,29,.25)_100%)]" />
+    <section id="inicio" className="relative flex min-h-[740px] items-end overflow-hidden bg-[#080709] pb-16 pt-32 md:min-h-[820px] md:pb-24">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_38%,rgba(185,93,85,.28),transparent_32%),linear-gradient(110deg,#080709_8%,rgba(8,7,9,.82)_45%,rgba(8,7,9,.25)_100%)]" />
       <div className="gb-luxe-glow absolute -left-24 top-24 h-72 w-72 rounded-full" />
       <Sparkles className="gb-sparkle absolute right-[22%] top-[22%] h-5 w-5 text-[#e4a49a]" />
       <div className="absolute inset-y-0 right-0 w-full md:w-[58%]">
         <img src="/images/hero-beauty.jpg" alt="Mulher com cabelo acobreado em retrato editorial" className="h-full w-full object-cover object-[56%_center] opacity-90 mix-blend-screen" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#24161d] via-[#24161d]/45 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#24161d] via-transparent to-[#24161d]/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#080709] via-[#080709]/45 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#080709] via-transparent to-[#080709]/20" />
       </div>
       <div className="gb-shell relative z-10 w-full">
         <div className="max-w-[720px] gb-reveal">
@@ -135,28 +135,24 @@ function Hero() {
 
 function Services({ onSelect }: { onSelect: (service: string) => void }) {
   return (
-    <section id="servicos" className="scroll-mt-6 bg-[#24161d] py-20 md:py-24">
+    <section id="servicos" className="scroll-mt-6 bg-[#080709] py-16 md:py-20">
       <div className="gb-shell">
-        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <SectionHeading eyebrow="01 / Serviços" title={<>Um cuidado que<br /><em className="text-[#df9587]">tem a sua medida.</em></>} copy="Cada serviço começa com uma conversa. O resultado é pensado para você, não para uma tendência." />
-          <p className="max-w-[180px] text-right font-mono text-[10px] uppercase leading-5 tracking-[.12em] text-[#a99594]">Deslize para descobrir<br />o seu próximo ritual</p>
+        <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <SectionHeading eyebrow="01 / Serviços" title={<>Escolha o seu<br /><em className="text-[#df9587]">próximo ritual.</em></>} copy="Toque em um serviço para adicioná-lo ao seu agendamento." />
+          <p className="max-w-[180px] text-right font-mono text-[10px] uppercase leading-5 tracking-[.12em] text-[#a99594]">Um ou mais<br />para você</p>
         </div>
-        <div className="mt-10 grid border-t border-[#f9eee7]/15 md:grid-cols-2">
-          {SERVICES.map((service) => (
-            <article key={service.id} className="group flex min-h-[180px] flex-col justify-between border-b border-[#f9eee7]/15 py-6 md:min-h-[205px] md:px-8 md:py-7 md:odd:border-r">
-              <div className="flex items-start justify-between gap-5">
-                <span className="font-mono text-[10px] tracking-[.1em] text-[#d68c80]">{service.number}</span>
-                <span className="font-mono text-[9px] uppercase tracking-[.13em] text-[#a99594]">{service.detail}</span>
-              </div>
-              <div className="mt-6 flex items-end justify-between gap-6">
-                <div>
-                  <h3 className="gb-display text-3xl text-[#f9eee7]">{service.title}</h3>
-                  <p className="mt-3 max-w-[370px] text-sm leading-6 text-[#b9a4a0]">{service.description}</p>
-                </div>
-                <button type="button" onClick={() => onSelect(service.title)} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#f9eee7]/20 text-[#d68c80] transition-all group-hover:border-[#d68c80] group-hover:bg-[#d68c80] group-hover:text-[#24161d]" aria-label={`Agendar ${service.title}`} data-testid={`button-service-${service.id}`}><Plus size={17} /></button>
-              </div>
-            </article>
-          ))}
+        <div className="mt-9 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+          {SERVICES.map((service) => {
+            const Icon = service.icon;
+            return (
+              <button type="button" key={service.id} onClick={() => onSelect(service.title)} title={service.description} className={`gb-service-tile ${service.id === 'mega-hair' ? 'gb-service-tile-featured' : ''}`} aria-label={`Adicionar ${service.title} ao agendamento`} data-testid={`button-service-${service.id}`}>
+                <span className="gb-service-number">{service.number}</span>
+                <span className="gb-service-icon"><Icon size={23} strokeWidth={1.35} /></span>
+                <span className="gb-service-title">{service.title}</span>
+                <span className="gb-service-detail">{service.detail}</span>
+              </button>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -186,7 +182,7 @@ function MegaHair({ onSelect }: { onSelect: (service: string) => void }) {
 
 function About() {
   return (
-    <section id="sobre" className="scroll-mt-6 bg-[#342028] py-20 md:py-24">
+    <section id="sobre" className="scroll-mt-6 bg-[#111014] py-20 md:py-24">
       <div className="gb-shell grid gap-10 md:grid-cols-[.8fr_1.2fr] md:gap-16">
         <div>
           <p className="gb-eyebrow">03 / O atelier</p>
@@ -207,7 +203,7 @@ function About() {
 
 function Gallery() {
   return (
-    <section id="galeria" className="scroll-mt-6 bg-[#24161d] py-20 md:py-24">
+    <section id="galeria" className="scroll-mt-6 bg-[#080709] py-20 md:py-24">
       <div className="gb-shell">
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <SectionHeading eyebrow="04 / Galeria" title={<>A beleza<br /><em className="text-[#df9587]">em detalhes.</em></>} />
@@ -217,7 +213,7 @@ function Gallery() {
           {GALLERY_ITEMS.map((item, index) => (
             <figure key={item.label} className={`group relative overflow-hidden ${index === 0 ? 'col-span-2 row-span-2 aspect-[.9] md:aspect-[.8]' : index === 1 ? 'col-span-2 aspect-[1.3] md:col-span-1 md:row-span-2 md:aspect-[.7]' : 'aspect-square'}`}>
               <img src={item.src} alt={item.alt} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#24161d]/80 via-transparent to-transparent opacity-80" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#080709]/80 via-transparent to-transparent opacity-80" />
               <figcaption className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-[10px] uppercase tracking-[.14em] text-[#f9eee7]"><span>{item.label}</span><ArrowUpRight size={14} /></figcaption>
             </figure>
           ))}
@@ -315,7 +311,7 @@ function Booking({ selectedServices, onClearSelection }: { selectedServices: str
             <label><span className="gb-input-label text-[#754447]">Horário desejado</span><input required type="time" value={form.time} onChange={(event) => updateField('time', event.target.value)} className="gb-field border-[#7b494b]/35 bg-[#f2d9d0]/40 text-[#24161d]" data-testid="input-booking-time" /></label>
           </div>
           <label><span className="gb-input-label text-[#754447]">Observações</span><textarea value={form.observations} onChange={(event) => updateField('observations', event.target.value)} className="gb-field min-h-[110px] resize-y border-[#7b494b]/35 bg-[#f2d9d0]/40 text-[#24161d] placeholder:text-[#81585a]" placeholder="Tem algo que gostaria de nos contar?" data-testid="textarea-booking-observations" /></label>
-          <button type="submit" className="gb-button mt-2 w-full border-[#24161d] bg-[#24161d] text-[#f2d9d0] hover:bg-[#45272e] sm:w-fit" data-testid="button-submit-booking">Enviar pedido de agendamento <ArrowUpRight size={16} /></button>
+          <button type="submit" className="gb-button mt-2 w-full border-[#080709] bg-[#080709] text-[#f2d9d0] hover:bg-[#45272e] sm:w-fit" data-testid="button-submit-booking">Enviar pedido de agendamento <ArrowUpRight size={16} /></button>
         </form>
       </div>
     </section>
@@ -324,7 +320,7 @@ function Booking({ selectedServices, onClearSelection }: { selectedServices: str
 
 function InstagramCta() {
   return (
-    <section id="instagram" className="scroll-mt-6 bg-[#24161d] py-20 md:py-24">
+    <section id="instagram" className="scroll-mt-6 bg-[#080709] py-20 md:py-24">
       <div className="gb-shell relative overflow-hidden border border-[#f9eee7]/15 px-7 py-14 md:px-16 md:py-20">
         <div className="absolute -right-10 -top-24 h-72 w-72 rounded-full border border-[#d68c80]/20 md:h-96 md:w-96" />
         <div className="absolute -right-2 -top-16 h-56 w-56 rounded-full border border-[#d68c80]/15 md:h-80 md:w-80" />
@@ -341,7 +337,7 @@ function InstagramCta() {
 
 function Footer() {
   return (
-    <footer className="bg-[#171016] pb-10 pt-16">
+    <footer className="bg-[#050506] pb-10 pt-16">
       <div className="gb-shell">
         <div className="grid gap-12 border-b border-[#f9eee7]/10 pb-14 md:grid-cols-[1.3fr_1fr_1fr]">
           <div><BrandMark /><p className="mt-7 max-w-xs text-sm leading-6 text-[#a99594]">Um atelier de beleza para você se sentir cuidada, confiante e extraordinária.</p></div>

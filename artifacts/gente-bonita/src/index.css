@@ -118,6 +118,17 @@
 
 .gb-card { border: 1px solid hsl(var(--border)); background: hsl(var(--card) / .82); transition: transform .35s ease, border-color .35s ease, background-color .35s ease; }
 .gb-card:hover { transform: translateY(-6px); border-color: hsl(var(--primary) / .62); background: hsl(var(--card)); }
+.gb-service-tile { position: relative; display: flex; min-height: 164px; flex-direction: column; align-items: center; justify-content: center; gap: 9px; overflow: hidden; border: 1px solid hsl(33 42% 92% / .14); border-radius: 14px; background: linear-gradient(145deg, hsl(345 16% 9% / .96), hsl(345 16% 5% / .98)); color: hsl(33 42% 92%); text-align: center; transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease, background-color .35s ease; }
+.gb-service-tile::before { content: ''; position: absolute; inset: -45% 15% auto; height: 130px; border-radius: 50%; background: hsl(9 62% 70% / .12); filter: blur(28px); transition: opacity .35s ease, transform .35s ease; }
+.gb-service-tile:hover, .gb-service-tile:focus-visible { transform: translateY(-6px); border-color: hsl(9 62% 70% / .8); background: linear-gradient(145deg, hsl(345 16% 12% / .98), hsl(345 16% 6% / .98)); box-shadow: 0 16px 42px hsl(345 40% 3% / .55), 0 0 26px hsl(9 62% 66% / .13); outline: none; }
+.gb-service-tile:hover::before, .gb-service-tile:focus-visible::before { opacity: 1.5; transform: scale(1.25); }
+.gb-service-tile-featured { border-color: hsl(9 62% 70% / .55); box-shadow: inset 0 0 0 1px hsl(9 62% 70% / .08), 0 0 26px hsl(9 62% 66% / .08); }
+.gb-service-icon { position: relative; display: grid; height: 57px; width: 57px; place-items: center; border: 1px solid hsl(9 62% 70% / .55); border-radius: 999px; background: radial-gradient(circle at 35% 28%, hsl(9 62% 76% / .34), hsl(345 16% 7% / .4) 68%); color: hsl(9 62% 76%); box-shadow: 0 0 22px hsl(9 62% 66% / .18), inset 0 0 14px hsl(9 62% 70% / .1); transition: transform .35s ease, box-shadow .35s ease, color .35s ease; }
+.gb-service-tile:hover .gb-service-icon, .gb-service-tile:focus-visible .gb-service-icon { transform: scale(1.08) rotate(-4deg); color: hsl(33 42% 96%); box-shadow: 0 0 30px hsl(9 62% 70% / .42), inset 0 0 18px hsl(9 62% 76% / .18); }
+.gb-service-number, .gb-service-detail { position: absolute; font: 500 9px/1 var(--app-font-mono); letter-spacing: .14em; text-transform: uppercase; }
+.gb-service-number { left: 14px; top: 14px; color: hsl(9 62% 70%); }
+.gb-service-detail { bottom: 14px; color: hsl(26 19% 67%); font-size: 8px; }
+.gb-service-title { position: relative; max-width: 120px; color: hsl(33 42% 92%); font: 500 14px/1.1 var(--app-font-serif); }
 .gb-field { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 6px; background: hsl(345 22% 11% / .52); color: hsl(var(--foreground)); padding: 13px 14px; outline: none; transition: border-color .2s ease, box-shadow .2s ease; }
 .gb-field::placeholder { color: hsl(var(--muted-foreground) / .7); }
 .gb-field:focus { border-color: hsl(var(--primary)); box-shadow: 0 0 0 3px hsl(var(--primary) / .12); }
