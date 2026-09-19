@@ -10,12 +10,12 @@ import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 const queryClient = new QueryClient();
 
 const CONTACTS = {
-  whatsappNumber: '5500000000000', // EDITAR: número com código do país, apenas dígitos
-  whatsappLabel: 'WhatsApp a confirmar',
+  whatsappNumber: '5566984165461',
+  whatsappLabel: '(66) 98416-5461',
   address: 'Endereço do atelier a confirmar',
   hours: 'Horários a confirmar',
-  instagramHandle: '@instagram_a_confirmar',
-  instagramUrl: 'https://instagram.com/',
+  instagramHandle: '@gentebonitabg',
+  instagramUrl: 'https://instagram.com/gentebonitabg',
 };
 
 const NAV_ITEMS = [
