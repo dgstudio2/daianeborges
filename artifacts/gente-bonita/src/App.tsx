@@ -12,11 +12,20 @@ const queryClient = new QueryClient();
 const CONTACTS = {
   whatsappNumber: '5566984165461',
   whatsappLabel: '(66) 98416-5461',
-  address: 'Endereço do atelier a confirmar',
-  hours: 'Horários a confirmar',
+  address: 'Rua Simeão Arraya, 1091 - Centro, Barra do Garças - MT, 78600-001',
+  hours: 'Terça a sexta · 09:00–18:00',
   instagramHandle: '@gentebonitabg',
   instagramUrl: 'https://instagram.com/gentebonitabg',
 };
+
+const OPENING_HOURS = [
+  { day: 'Domingo', hours: 'Fechada' },
+  { day: 'Segunda-feira', hours: 'Fechada' },
+  { day: 'Terça-feira', hours: '09:00–18:00' },
+  { day: 'Quarta-feira', hours: '09:00–18:00' },
+  { day: 'Quinta-feira', hours: '09:00–18:00' },
+  { day: 'Sexta-feira', hours: '09:00–18:00' },
+];
 
 const NAV_ITEMS = [
   { label: 'Início', href: '#inicio' },
@@ -341,7 +350,21 @@ function Footer() {
       <div className="gb-shell">
         <div className="grid gap-12 border-b border-[#f9eee7]/10 pb-14 md:grid-cols-[1.3fr_1fr_1fr]">
           <div><BrandMark /><p className="mt-7 max-w-xs text-sm leading-6 text-[#a99594]">Um atelier de beleza para você se sentir cuidada, confiante e extraordinária.</p></div>
-          <div><p className="gb-eyebrow mb-5">Visite</p><p className="text-sm leading-6 text-[#b9a4a0]">{CONTACTS.address}</p><p className="mt-3 text-sm leading-6 text-[#b9a4a0]">{CONTACTS.hours}</p></div>
+          <div>
+            <p className="gb-eyebrow mb-5">Visite</p>
+            <p className="text-sm leading-6 text-[#b9a4a0]">{CONTACTS.address}</p>
+            <div className="mt-6 border-t border-[#f9eee7]/10 pt-5">
+              <p className="gb-eyebrow mb-4">Horários</p>
+              <div className="grid gap-2 text-xs text-[#b9a4a0]">
+                {OPENING_HOURS.map((item) => (
+                  <div key={item.day} className="flex justify-between gap-4">
+                    <span>{item.day}</span>
+                    <span className={item.hours === 'Fechada' ? 'text-[#776b70]' : 'text-[#df9587]'}>{item.hours}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
           <div><p className="gb-eyebrow mb-5">Converse</p><a href={`https://wa.me/${CONTACTS.whatsappNumber}`} target="_blank" rel="noreferrer" className="block text-sm text-[#b9a4a0] transition-colors hover:text-[#df9587]" data-testid="link-footer-whatsapp">{CONTACTS.whatsappLabel}</a><a href={CONTACTS.instagramUrl} target="_blank" rel="noreferrer" className="mt-3 block text-sm text-[#b9a4a0] transition-colors hover:text-[#df9587]" data-testid="link-footer-instagram">{CONTACTS.instagramHandle}</a></div>
         </div>
         <div className="flex flex-col justify-between gap-4 pt-7 text-[10px] uppercase tracking-[.12em] text-[#786a70] md:flex-row"><span>© {new Date().getFullYear()} Gente Bonita</span><span>Beleza com presença.</span></div>
