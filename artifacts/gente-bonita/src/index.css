@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @plugin "@tailwindcss/typography";
@@ -53,8 +53,8 @@
   --accent-foreground: 345 22% 11%;
   --destructive: 2 66% 54%;
   --destructive-foreground: 33 42% 92%;
-  --app-font-sans: 'DM Sans', sans-serif;
-  --app-font-serif: 'Playfair Display', serif;
+  --app-font-sans: 'Manrope', sans-serif;
+  --app-font-serif: 'Cormorant Garamond', serif;
   --app-font-mono: 'DM Mono', monospace;
   --radius: 0.75rem;
   --shadow-sm: 0 12px 34px rgba(14, 7, 10, .24);
@@ -82,7 +82,7 @@
 @layer utilities {
   .gb-shell { width: min(1160px, calc(100% - 48px)); margin-inline: auto; }
   .gb-eyebrow { color: hsl(var(--accent)); font: 500 10px/1 var(--app-font-mono); letter-spacing: .22em; text-transform: uppercase; }
-  .gb-display { font-family: var(--app-font-serif); font-weight: 500; letter-spacing: -.035em; }
+.gb-display { font-family: var(--app-font-serif); font-weight: 600; letter-spacing: -.035em; }
   .gb-muted { color: hsl(var(--muted-foreground)); }
   .gb-hairline { height: 1px; background: hsl(var(--border)); }
 }
@@ -129,12 +129,12 @@
 .gb-service-number { left: 14px; top: 14px; color: hsl(9 62% 70%); }
 .gb-service-detail { bottom: 14px; color: hsl(26 19% 67%); font-size: 8px; }
 .gb-service-title { position: relative; max-width: 120px; color: hsl(33 42% 92%); font: 500 14px/1.1 var(--app-font-serif); }
-.gb-field { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 6px; background: hsl(345 22% 11% / .52); color: hsl(var(--foreground)); padding: 13px 14px; outline: none; transition: border-color .2s ease, box-shadow .2s ease; }
-.gb-field::placeholder { color: hsl(var(--muted-foreground) / .7); }
-.gb-field:focus { border-color: hsl(var(--primary)); box-shadow: 0 0 0 3px hsl(var(--primary) / .12); }
-.gb-field option { background: hsl(var(--card)); color: hsl(var(--foreground)); }
-.gb-input-label { display: block; margin-bottom: 8px; color: hsl(var(--muted-foreground)); font: 500 10px/1 var(--app-font-mono); letter-spacing: .12em; text-transform: uppercase; }
-.gb-service-choice { display: flex; min-height: 43px; align-items: center; justify-content: space-between; gap: 8px; border: 1px solid hsl(344 24% 32% / .45); border-radius: 6px; padding: 0 11px; color: hsl(345 25% 27%); cursor: pointer; font-size: 12px; transition: border-color .2s ease, background-color .2s ease, color .2s ease, transform .2s ease; }
+.gb-field { width: 100%; border: 1px solid hsl(9 62% 70% / .42); border-radius: 6px; background: hsl(345 22% 8% / .92); color: hsl(33 42% 96%); padding: 13px 14px; outline: none; font-weight: 500; transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease; }
+.gb-field::placeholder { color: hsl(33 42% 92% / .74); }
+.gb-field:focus { border-color: hsl(9 62% 76%); background: hsl(345 22% 6% / .98); box-shadow: 0 0 0 3px hsl(9 62% 70% / .18), 0 0 22px hsl(9 62% 66% / .13); }
+.gb-field option { background: hsl(345 17% 9%); color: hsl(33 42% 96%); }
+.gb-input-label { display: block; margin-bottom: 8px; color: hsl(345 35% 18%); font: 700 10px/1 var(--app-font-mono); letter-spacing: .14em; text-transform: uppercase; }
+.gb-service-choice { display: flex; min-height: 43px; align-items: center; justify-content: space-between; gap: 8px; border: 1px solid hsl(344 24% 32% / .5); border-radius: 6px; padding: 0 11px; color: hsl(345 35% 16%); cursor: pointer; font-size: 12px; font-weight: 600; transition: border-color .2s ease, background-color .2s ease, color .2s ease, transform .2s ease; }
 .gb-service-choice:hover { transform: translateY(-1px); border-color: hsl(9 62% 54% / .7); background: hsl(9 62% 66% / .12); }
 .gb-service-choice-selected { border-color: hsl(9 62% 45% / .82); background: hsl(9 62% 66% / .2); color: hsl(345 30% 18%); box-shadow: 0 0 0 1px hsl(9 62% 66% / .12), 0 6px 18px hsl(345 30% 14% / .08); }
 

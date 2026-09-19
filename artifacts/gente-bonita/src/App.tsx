@@ -287,19 +287,19 @@ function Booking({ selectedServices, onClearSelection }: { selectedServices: str
     <section id="agendamento" className="scroll-mt-6 bg-[#d68c80] py-20 text-[#24161d] md:py-24">
       <div className="gb-shell grid gap-10 md:grid-cols-[.8fr_1.2fr] md:gap-16">
         <div>
-        <p className="gb-eyebrow text-[#754447]">05 / Agendamento</p>
+          <p className="gb-eyebrow text-[#3a1c20]">05 / Agendamento</p>
           <h2 className="gb-display mt-6 text-5xl leading-[.92] md:text-7xl">Vamos reservar<br /><em>um tempo<br />para você?</em></h2>
-          <p className="mt-6 max-w-sm text-sm leading-6 text-[#5d3639]">Preencha o formulário e conte um pouco do que você deseja. Este é um pedido de horário — a confirmação acontece depois, pelo WhatsApp.</p>
-          <div className="mt-7 flex items-center gap-3 border-t border-[#24161d]/20 pt-5 text-xs text-[#5d3639]"><Clock3 size={16} /><span>{CONTACTS.hours}</span></div>
+          <p className="mt-6 max-w-sm text-sm font-medium leading-6 text-[#402125]">Preencha o formulário e conte um pouco do que você deseja. Este é um pedido de horário — a confirmação acontece depois, pelo WhatsApp.</p>
+          <div className="mt-7 flex items-center gap-3 border-t border-[#24161d]/25 pt-5 text-xs font-semibold text-[#402125]"><Clock3 size={16} /><span>{CONTACTS.hours}</span></div>
         </div>
         <form onSubmit={submit} className="grid gap-5" data-testid="form-booking">
           <div className="grid gap-5 sm:grid-cols-2">
-            <label><span className="gb-input-label text-[#754447]">Seu nome</span><input required value={form.name} onChange={(event) => updateField('name', event.target.value)} className="gb-field border-[#7b494b]/35 bg-[#f2d9d0]/40 text-[#24161d] placeholder:text-[#81585a]" placeholder="Como podemos chamar você?" data-testid="input-booking-name" /></label>
-            <label><span className="gb-input-label text-[#754447]">WhatsApp</span><input required value={form.whatsapp} onChange={(event) => updateField('whatsapp', event.target.value)} className="gb-field border-[#7b494b]/35 bg-[#f2d9d0]/40 text-[#24161d] placeholder:text-[#81585a]" placeholder="(00) 00000-0000" data-testid="input-booking-whatsapp" /></label>
+            <label><span className="gb-input-label text-[#3a1c20]">Seu nome</span><input required value={form.name} onChange={(event) => updateField('name', event.target.value)} className="gb-field text-[#f9eee7] placeholder:text-[#ead4cc]" placeholder="Como podemos chamar você?" data-testid="input-booking-name" /></label>
+            <label><span className="gb-input-label text-[#3a1c20]">WhatsApp</span><input required value={form.whatsapp} onChange={(event) => updateField('whatsapp', event.target.value)} className="gb-field text-[#f9eee7] placeholder:text-[#ead4cc]" placeholder="(00) 00000-0000" data-testid="input-booking-whatsapp" /></label>
           </div>
           <div className="grid gap-5 sm:grid-cols-2">
             <div>
-              <span className="gb-input-label text-[#754447]">Serviços desejados <span className="normal-case tracking-normal text-[#8b5b5d]">· escolha quantos quiser</span></span>
+              <span className="gb-input-label text-[#3a1c20]">Serviços desejados <span className="normal-case tracking-normal text-[#713e42]">· escolha quantos quiser</span></span>
               <div className="grid grid-cols-2 gap-2 sm:grid-cols-3" role="group" aria-label="Serviços desejados">
                 {SERVICES.map((service) => {
                   const selected = form.services.includes(service.title);
@@ -314,13 +314,13 @@ function Booking({ selectedServices, onClearSelection }: { selectedServices: str
               </div>
               {serviceError && <p className="mt-2 text-xs text-[#713e42]" role="alert">Escolha pelo menos um serviço para continuar.</p>}
             </div>
-            <label><span className="gb-input-label text-[#754447]">Profissional (opcional)</span><select value={form.professional} onChange={(event) => updateField('professional', event.target.value)} className="gb-field border-[#7b494b]/35 bg-[#f2d9d0]/40 text-[#24161d]" data-testid="select-booking-professional"><option value="">Escolha uma opção</option>{PROFESSIONALS.map((professional) => <option key={professional} value={professional}>{professional}</option>)}</select></label>
+            <label><span className="gb-input-label text-[#3a1c20]">Profissional (opcional)</span><select value={form.professional} onChange={(event) => updateField('professional', event.target.value)} className="gb-field text-[#f9eee7]" data-testid="select-booking-professional"><option value="">Escolha uma opção</option>{PROFESSIONALS.map((professional) => <option key={professional} value={professional}>{professional}</option>)}</select></label>
           </div>
           <div className="grid gap-5 sm:grid-cols-2">
-            <label><span className="gb-input-label text-[#754447]">Data desejada</span><input required type="date" value={form.date} onChange={(event) => updateField('date', event.target.value)} className="gb-field border-[#7b494b]/35 bg-[#f2d9d0]/40 text-[#24161d]" data-testid="input-booking-date" /></label>
-            <label><span className="gb-input-label text-[#754447]">Horário desejado</span><input required type="time" value={form.time} onChange={(event) => updateField('time', event.target.value)} className="gb-field border-[#7b494b]/35 bg-[#f2d9d0]/40 text-[#24161d]" data-testid="input-booking-time" /></label>
+            <label><span className="gb-input-label text-[#3a1c20]">Data desejada</span><input required type="date" value={form.date} onChange={(event) => updateField('date', event.target.value)} className="gb-field text-[#f9eee7]" data-testid="input-booking-date" /></label>
+            <label><span className="gb-input-label text-[#3a1c20]">Horário desejado</span><input required type="time" value={form.time} onChange={(event) => updateField('time', event.target.value)} className="gb-field text-[#f9eee7]" data-testid="input-booking-time" /></label>
           </div>
-          <label><span className="gb-input-label text-[#754447]">Observações</span><textarea value={form.observations} onChange={(event) => updateField('observations', event.target.value)} className="gb-field min-h-[110px] resize-y border-[#7b494b]/35 bg-[#f2d9d0]/40 text-[#24161d] placeholder:text-[#81585a]" placeholder="Tem algo que gostaria de nos contar?" data-testid="textarea-booking-observations" /></label>
+          <label><span className="gb-input-label text-[#3a1c20]">Observações</span><textarea value={form.observations} onChange={(event) => updateField('observations', event.target.value)} className="gb-field min-h-[110px] resize-y text-[#f9eee7] placeholder:text-[#ead4cc]" placeholder="Tem algo que gostaria de nos contar?" data-testid="textarea-booking-observations" /></label>
           <button type="submit" className="gb-button mt-2 w-full border-[#080709] bg-[#080709] text-[#f2d9d0] hover:bg-[#45272e] sm:w-fit" data-testid="button-submit-booking">Enviar pedido de agendamento <ArrowUpRight size={16} /></button>
         </form>
       </div>
