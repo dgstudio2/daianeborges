@@ -129,8 +129,7 @@ function Hero() {
         <div className="max-w-[720px] gb-reveal">
           <p className="gb-eyebrow mb-7">Um atelier para a sua beleza</p>
           <h1 className="gb-display max-w-[760px] text-[clamp(3.65rem,9vw,7.9rem)] leading-[.88] text-[#f9eee7]">Sua beleza merece uma <em className="text-[#df9587]">experiência</em> extraordinária.</h1>
-          <div className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-center">
-            <a href="#agendamento" onClick={(event) => { event.preventDefault(); scrollToSection('#agendamento'); }} className="gb-button gb-button-primary w-fit" data-testid="link-hero-booking">Quero viver essa experiência <ArrowUpRight size={16} /></a>
+          <div className="mt-10">
             <a href="#servicos" onClick={(event) => { event.preventDefault(); scrollToSection('#servicos'); }} className="group flex w-fit items-center gap-3 text-[11px] uppercase tracking-[.14em] text-[#f9eee7]" data-testid="link-hero-services">Conheça os serviços <ChevronRight size={16} className="transition-transform group-hover:translate-x-1" /></a>
           </div>
         </div>
