@@ -13,6 +13,7 @@ const CONTACTS = {
   whatsappNumber: '5566984165461',
   whatsappLabel: '(66) 98416-5461',
   address: 'Rua Simeão Arraya, 1091 - Centro, Barra do Garças - MT, 78600-001',
+  mapsUrl: 'https://maps.app.goo.gl/MjawqW4HePjDFeKVA',
   hours: 'Terça a sexta · 09:00–18:00',
   instagramHandle: '@gentebonitabg',
   instagramUrl: 'https://instagram.com/gentebonitabg',
@@ -352,7 +353,7 @@ function Footer() {
           <div><BrandMark /><p className="mt-7 max-w-xs text-sm leading-6 text-[#a99594]">Um atelier de beleza para você se sentir cuidada, confiante e extraordinária.</p></div>
           <div>
             <p className="gb-eyebrow mb-5">Visite</p>
-            <p className="text-sm leading-6 text-[#b9a4a0]">{CONTACTS.address}</p>
+            <a href={CONTACTS.mapsUrl} target="_blank" rel="noreferrer" className="block text-sm leading-6 text-[#b9a4a0] transition-colors hover:text-[#df9587]" data-testid="link-footer-address">{CONTACTS.address}</a>
             <div className="mt-6 border-t border-[#f9eee7]/10 pt-5">
               <p className="gb-eyebrow mb-4">Horários</p>
               <div className="grid gap-2 text-xs text-[#b9a4a0]">
