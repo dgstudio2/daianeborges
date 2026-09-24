@@ -2,6 +2,9 @@
   command = "corepack enable && pnpm install && pnpm --filter @workspace/gente-bonita run build"
   publish = "artifacts/gente-bonita/dist"
 
+[build.environment]
+  PNPM_VERSION = "9.12.0"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
