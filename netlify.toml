@@ -1,7 +1,6 @@
 [build]
-  base = "artifacts/gente-bonita"
-  command = "npm install && npm run build"
-  publish = "dist"
+  command = "pnpm install --no-frozen-lockfile && pnpm --filter @workspace/gente-bonita run build"
+  publish = "artifacts/gente-bonita/dist"
 
 [[redirects]]
   from = "/*"
