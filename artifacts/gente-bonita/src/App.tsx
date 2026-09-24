@@ -25,6 +25,23 @@ function waLink(number: string, text: string) {
   return `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
 }
 
+const playClick = () => {
+  try {
+    const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(900, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.05);
+    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.05);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 0.05);
+  } catch (e) {}
+};
+
 // ── Marca ─────────────────────────────────────────────────────────────────────
 function Header() {
   return (
@@ -54,6 +71,19 @@ function Hero() {
           <p className="mt-5 text-[15px] leading-relaxed max-w-[440px] mx-auto" style={{ color: 'hsl(0 0% 55%)' }}>
             {settings.hero_subtitle}
           </p>
+          <div className={`mt-8 flex ${heroImg ? 'justify-start' : 'justify-center'}`}>
+            <a
+              href="#agendamento"
+              onClick={(e) => {
+                e.preventDefault();
+                playClick();
+                scrollTo('#agendamento');
+              }}
+              className="dg-button dg-button-gold-neon h-[52px] px-8 text-[12px] uppercase tracking-widest font-bold"
+            >
+              Agendar Horário
+            </a>
+          </div>
         </div>
 
         {heroImg && (
@@ -342,6 +372,30 @@ function Footer() {
   );
 }
 
+// ── Gallery ───────────────────────────────────────────────────────────────────
+function Gallery() {
+  const { settings } = useSiteData();
+  const images = settings.gallery_images || [];
+  if (images.length === 0) return null;
+
+  // Duplicar imagens para criar o efeito de scroll infinito sem "pulo"
+  const trackImages = [...images, ...images, ...images];
+
+  return (
+    <section className="py-10" style={{ background: 'hsl(0 0% 5%)', overflow: 'hidden' }}>
+      <div style={{ width: '200%', display: 'flex' }} className="dg-gallery-track">
+        {trackImages.map((img, i) => (
+          <div key={i} style={{ width: '25vw', flexShrink: 0, padding: '0 8px' }}>
+            <div style={{ position: 'relative', width: '100%', aspectRatio: '4/5', borderRadius: 8, overflow: 'hidden' }}>
+              <img src={img} alt="Galeria Daiane Gomes Studio" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 // ── Home ──────────────────────────────────────────────────────────────────────
 function Home() {
   return (
@@ -352,6 +406,7 @@ function Home() {
         <Services />
         <HoursAndBooking />
       </main>
+      <Gallery />
       <Footer />
     </div>
   );

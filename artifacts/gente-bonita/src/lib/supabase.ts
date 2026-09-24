@@ -35,6 +35,7 @@ export type SiteSettings = {
   instagram_handle: string;
   instagram_url: string;
   footer_tagline: string;
+  gallery_images: string[];
 };
 
 export type SiteData = {
@@ -52,6 +53,13 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   instagram_handle: '@daianegomesstudio',
   instagram_url: 'https://instagram.com/daianegomesstudio',
   footer_tagline: 'Micropigmentação e estética facial de alto padrão com exclusividade e sofisticação.',
+  gallery_images: [
+    'https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=600&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=600&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1588514981143-6c845b59740a?q=80&w=600&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1512496015851-a1dc8a474665?q=80&w=600&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=600&auto=format&fit=crop'
+  ],
 };
 
 export const DEFAULT_SERVICES: ServiceRow[] = [
@@ -88,7 +96,11 @@ export async function loadSiteData(): Promise<SiteData> {
     let settings = { ...DEFAULT_SETTINGS };
     if (stRes.data && stRes.data.length > 0) {
       for (const row of stRes.data as { key: string; value: string }[]) {
-        (settings as Record<string, string>)[row.key] = row.value;
+        if (row.key === 'gallery_images') {
+          settings.gallery_images = row.value ? row.value.split(',') : [];
+        } else {
+          (settings as Record<string, any>)[row.key] = row.value;
+        }
       }
     }
 

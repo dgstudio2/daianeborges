@@ -392,13 +392,112 @@ function ContactTab({ settings, onRefresh }: { settings: SiteSettings; onRefresh
   );
 }
 
+// ── Gallery Tab ───────────────────────────────────────────────────────────────
+function GalleryTab({ settings, onRefresh }: { settings: SiteSettings; onRefresh: () => void }) {
+  const [images, setImages] = useState<string[]>(settings.gallery_images || []);
+  const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [toast, setToast] = useState<{ msg: string; type: 'ok' | 'err' } | null>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const showToast = (msg: string, type: 'ok' | 'err') => { setToast({ msg, type }); setTimeout(() => setToast(null), 3500); };
+
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+    setUploading(true);
+    try {
+      const newUrls: string[] = [];
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const ext = file.name.split('.').pop()?.toLowerCase() ?? 'jpg';
+        if (!['jpg', 'jpeg', 'png', 'webp'].includes(ext)) { showToast('Formato inválido. Use PNG, JPG ou WebP.', 'err'); continue; }
+        const url = await uploadMediaFile(file, `gallery/${Date.now()}_${i}.${ext}`);
+        newUrls.push(url);
+      }
+      setImages(prev => [...prev, ...newUrls]);
+      showToast('Imagens enviadas! Clique em Salvar para confirmar.', 'ok');
+    } catch (err: unknown) {
+      showToast(`Erro no upload.`, 'err');
+    } finally {
+      setUploading(false);
+      if (fileRef.current) fileRef.current.value = '';
+    }
+  };
+
+  const handleRemove = async (index: number) => {
+    if (!confirm('Remover esta imagem da galeria?')) return;
+    try {
+      const url = images[index];
+      const match = url.match(/\/object\/public\/media\/(.+)/);
+      if (match) await deleteMediaFile(match[1]);
+      setImages(prev => prev.filter((_, i) => i !== index));
+      showToast('Imagem removida. Clique em Salvar.', 'ok');
+    } catch {
+      showToast('Erro ao remover imagem.', 'err');
+    }
+  };
+
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      await supabase.from('site_settings').upsert([
+        { key: 'gallery_images', value: images.join(',') }
+      ]);
+      onRefresh();
+      showToast('Galeria salva com sucesso!', 'ok');
+    } catch {
+      showToast('Erro ao salvar galeria.', 'err');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'space-between' }}>
+        <h2 style={{ color: '#f5f0ea', fontSize: 22, fontFamily: 'Georgia, serif', margin: 0, flex: 1 }}>Galeria de Fotos</h2>
+        <button
+          onClick={() => fileRef.current?.click()}
+          disabled={uploading}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 18px', background: GOLD, border: 'none', borderRadius: 6, color: '#fff', cursor: 'pointer', fontSize: 13, fontWeight: 700 }}
+        >
+          <Upload size={14} /> {uploading ? 'Enviando...' : 'Adicionar Fotos'}
+        </button>
+        <input ref={fileRef} type="file" multiple accept="image/png,image/jpeg,image/webp" style={{ display: 'none' }} onChange={handleUpload} />
+      </div>
+
+      {images.length === 0 ? (
+        <div style={{ color: '#555', fontSize: 14 }}>Nenhuma imagem na galeria.</div>
+      ) : (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 16 }}>
+          {images.map((img, i) => (
+            <div key={i} style={{ position: 'relative', aspectRatio: '1/1', borderRadius: 8, overflow: 'hidden', border: `1px solid ${DARK_BORDER}` }}>
+              <img src={img} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <button
+                onClick={() => handleRemove(i)}
+                style={{ position: 'absolute', top: 6, right: 6, background: '#dc2626', color: '#fff', border: 'none', borderRadius: '50%', width: 28, height: 28, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              ><X size={14} /></button>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div><SaveBtn onClick={handleSave} saving={saving} /></div>
+      {toast && <Toast msg={toast.msg} type={toast.type} />}
+    </div>
+  );
+}
+
+
 // ── Admin Dashboard ───────────────────────────────────────────────────────────
-type Tab = 'hero' | 'services' | 'hours' | 'contact';
+type Tab = 'hero' | 'services' | 'hours' | 'contact' | 'gallery';
 
 const TABS: { id: Tab; label: string; icon: React.ReactNode }[] = [
   { id: 'hero', label: 'Hero', icon: <ImageIcon size={15} /> },
   { id: 'services', label: 'Serviços', icon: <Layers size={15} /> },
   { id: 'hours', label: 'Horários', icon: <Clock size={15} /> },
+  { id: 'gallery', label: 'Galeria', icon: <ImageIcon size={15} /> },
   { id: 'contact', label: 'Contato & Rodapé', icon: <Phone size={15} /> },
 ];
 
@@ -417,10 +516,14 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
       const settings: SiteSettings = {
         hero_title: '', hero_subtitle: '', hero_image_url: '',
         whatsapp_number: '', whatsapp_label: '', instagram_handle: '',
-        instagram_url: '', footer_tagline: '',
+        instagram_url: '', footer_tagline: '', gallery_images: [],
       };
       for (const row of (stRes.data ?? []) as { key: string; value: string }[]) {
-        (settings as Record<string, string>)[row.key] = row.value;
+        if (row.key === 'gallery_images') {
+          settings.gallery_images = row.value ? row.value.split(',') : [];
+        } else {
+          (settings as Record<string, any>)[row.key] = row.value;
+        }
       }
       setData({ services: (svcRes.data ?? []) as ServiceRow[], hours: (hrRes.data ?? []) as HourRow[], settings });
     } catch (err: unknown) {
@@ -477,6 +580,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
               {activeTab === 'hero'     && <HeroTab settings={data.settings} onRefresh={loadData} />}
               {activeTab === 'services' && <ServicesTab initialServices={data.services} onRefresh={loadData} />}
               {activeTab === 'hours'    && <HoursTab initialHours={data.hours} onRefresh={loadData} />}
+              {activeTab === 'gallery'  && <GalleryTab settings={data.settings} onRefresh={loadData} />}
               {activeTab === 'contact'  && <ContactTab settings={data.settings} onRefresh={loadData} />}
             </>
           )}
