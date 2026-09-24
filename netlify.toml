@@ -1,9 +1,7 @@
 [build]
-  command = "corepack enable && pnpm install && pnpm --filter @workspace/gente-bonita run build"
-  publish = "artifacts/gente-bonita/dist"
-
-[build.environment]
-  PNPM_VERSION = "9.12.0"
+  base = "artifacts/gente-bonita"
+  command = "npm install && npm run build"
+  publish = "dist"
 
 [[redirects]]
   from = "/*"
