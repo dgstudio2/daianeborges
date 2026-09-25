@@ -1,5 +1,5 @@
 [build]
-  command = "pnpm install --no-frozen-lockfile && pnpm --filter @workspace/gente-bonita run build"
+  command = "pnpm --filter @workspace/gente-bonita run build"
   publish = "artifacts/gente-bonita/dist"
 
 [[redirects]]
