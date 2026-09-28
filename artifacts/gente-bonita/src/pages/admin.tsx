@@ -186,6 +186,83 @@ function HeroTab({ settings, onRefresh }: { settings: SiteSettings; onRefresh: (
 // ── Services Tab ──────────────────────────────────────────────────────────────
 type EditableService = ServiceRow & { _dirty?: boolean };
 
+function ServiceImageUpload({ svc, onUrlChange }: { svc: EditableService; onUrlChange: (url: string | null) => void }) {
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+  const [toast, setToast] = useState<{ msg: string; type: 'ok' | 'err' } | null>(null);
+
+  const showToast = (msg: string, type: 'ok' | 'err') => { setToast({ msg, type }); setTimeout(() => setToast(null), 3500); };
+
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const ext = file.name.split('.').pop()?.toLowerCase() ?? 'jpg';
+    if (!['jpg', 'jpeg', 'png', 'webp'].includes(ext)) { showToast('Formato inválido. Use PNG, JPG ou WebP.', 'err'); return; }
+    setUploading(true);
+    try {
+      const url = await uploadMediaFile(file, `services/${svc.id}.${ext}`);
+      onUrlChange(url);
+      showToast('Imagem enviada! Clique em Salvar para confirmar.', 'ok');
+    } catch (err: unknown) {
+      showToast(`Erro no upload: ${err instanceof Error ? err.message : 'Erro desconhecido'}`, 'err');
+    } finally {
+      setUploading(false);
+      if (fileRef.current) fileRef.current.value = '';
+    }
+  };
+
+  const handleRemove = async () => {
+    if (!svc.image_url) return;
+    if (!confirm('Remover a imagem deste serviço?')) return;
+    try {
+      const match = svc.image_url.match(/\/object\/public\/media\/(.+)/);
+      if (match) await deleteMediaFile(match[1]);
+      onUrlChange(null);
+      showToast('Imagem removida. Clique em Salvar.', 'ok');
+    } catch {
+      showToast('Erro ao remover imagem.', 'err');
+    }
+  };
+
+  return (
+    <div>
+      <label style={{ display: 'block', marginBottom: 12, fontSize: 10, fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: '#aaa' }}>Foto do Serviço</label>
+
+      {svc.image_url ? (
+        <div style={{ position: 'relative', marginBottom: 16, borderRadius: 8, overflow: 'hidden', border: `1px solid ${DARK_BORDER}`, maxWidth: 420 }}>
+          <img src={svc.image_url} alt={svc.title} style={{ width: '100%', height: 200, objectFit: 'cover', display: 'block' }} />
+          <button
+            onClick={handleRemove}
+            style={{ position: 'absolute', top: 10, right: 10, background: '#dc2626', color: '#fff', border: 'none', borderRadius: '50%', width: 34, height: 34, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          ><X size={16} /></button>
+        </div>
+      ) : (
+        <div
+          style={{ width: '100%', maxWidth: 420, height: 150, border: `2px dashed ${DARK_BORDER}`, borderRadius: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12, cursor: 'pointer', color: '#555', marginBottom: 16, transition: 'border-color .2s' }}
+          onClick={() => fileRef.current?.click()}
+          onMouseEnter={e => (e.currentTarget.style.borderColor = GOLD)}
+          onMouseLeave={e => (e.currentTarget.style.borderColor = DARK_BORDER)}
+        >
+          <ImageIcon size={32} />
+          <span style={{ fontSize: 13 }}>Nenhuma imagem. Clique para enviar.</span>
+        </div>
+      )}
+
+      <input ref={fileRef} type="file" accept="image/png,image/jpeg,image/webp" style={{ display: 'none' }} onChange={handleUpload} />
+
+      <button
+        onClick={() => fileRef.current?.click()}
+        disabled={uploading}
+        style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 18px', background: 'transparent', border: `1px solid ${DARK_BORDER}`, borderRadius: 6, color: '#f5f0ea', cursor: 'pointer', fontSize: 13, fontWeight: 600 }}
+      >
+        <Upload size={14} /> {uploading ? 'Enviando...' : svc.image_url ? 'Trocar imagem' : 'Enviar imagem (PNG ou JPG)'}
+      </button>
+      <p style={{ marginTop: 8, fontSize: 12, color: '#555' }}>PNG, JPG ou WebP · A imagem antiga é removida automaticamente.</p>
+      {toast && <Toast msg={toast.msg} type={toast.type} />}
+    </div>
+  );
+}
+
 function ServicesTab({ initialServices, onRefresh }: { initialServices: ServiceRow[]; onRefresh: () => void }) {
   const [services, setServices] = useState<EditableService[]>(initialServices);
   const [saving, setSaving] = useState<string | null>(null);
@@ -264,7 +341,8 @@ function ServicesTab({ initialServices, onRefresh }: { initialServices: ServiceR
             <AdminInput label="Preço antigo (opcional)" value={svc.old_price ?? ''} onChange={v => update(svc.id, 'old_price', v || null)} placeholder="R$ 500" />
             <AdminInput label="Duração" value={svc.duration} onChange={v => update(svc.id, 'duration', v)} placeholder="~1h" />
           </div>
-          <AdminInput label="URL da imagem" value={svc.image_url ?? ''} onChange={v => update(svc.id, 'image_url', v || null)} placeholder="https://..." />
+
+          <ServiceImageUpload svc={svc} onUrlChange={url => update(svc.id, 'image_url', url)} />
 
           <div><SaveBtn onClick={() => handleSave(svc)} saving={saving === svc.id} label="Salvar este serviço" /></div>
         </div>
