@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, type FormEvent } from 'react';
-import { supabase, type ServiceRow, type HourRow, type SiteSettings, uploadMediaFile, deleteMediaFile } from '@/lib/supabase';
+import { supabase, type ServiceRow, type HourRow, type SiteSettings, DEFAULT_SETTINGS, uploadMediaFile, deleteMediaFile } from '@/lib/supabase';
 import { ArrowLeft, Save, Plus, Trash2, Upload, X, Eye, EyeOff, LogOut, Image as ImageIcon, Clock, Phone, Layers, Star } from 'lucide-react';
 
 // ── Credentials ───────────────────────────────────────────────────────────────
@@ -80,6 +80,12 @@ function HeroTab({ settings, onRefresh }: { settings: SiteSettings; onRefresh: (
   const [toast, setToast] = useState<{ msg: string; type: 'ok' | 'err' } | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    setTitle(settings.hero_title);
+    setSubtitle(settings.hero_subtitle);
+    setImageUrl(settings.hero_image_url);
+  }, [settings]);
+
   const showToast = (msg: string, type: 'ok' | 'err') => {
     setToast({ msg, type });
     setTimeout(() => setToast(null), 3500);
@@ -120,15 +126,16 @@ function HeroTab({ settings, onRefresh }: { settings: SiteSettings; onRefresh: (
   const handleSave = async () => {
     setSaving(true);
     try {
-      await supabase.from('site_settings').upsert([
+      const { error } = await supabase.from('site_settings').upsert([
         { key: 'hero_title', value: title },
         { key: 'hero_subtitle', value: subtitle },
         { key: 'hero_image_url', value: imageUrl },
       ]);
+      if (error) throw error;
       onRefresh();
       showToast('Hero atualizada com sucesso!', 'ok');
-    } catch {
-      showToast('Erro ao salvar. Tente novamente.', 'err');
+    } catch (err: unknown) {
+      showToast(`Erro ao salvar: ${err instanceof Error ? err.message : 'Tente novamente.'}`, 'err');
     } finally {
       setSaving(false);
     }
@@ -268,6 +275,10 @@ function ServicesTab({ initialServices, onRefresh }: { initialServices: ServiceR
   const [saving, setSaving] = useState<string | null>(null);
   const [toast, setToast] = useState<{ msg: string; type: 'ok' | 'err' } | null>(null);
 
+  useEffect(() => {
+    setServices(initialServices);
+  }, [initialServices]);
+
   const showToast = (msg: string, type: 'ok' | 'err') => { setToast({ msg, type }); setTimeout(() => setToast(null), 3500); };
 
   const update = (id: string, field: keyof ServiceRow, val: unknown) =>
@@ -279,23 +290,33 @@ function ServicesTab({ initialServices, onRefresh }: { initialServices: ServiceR
       const { _dirty, ...row } = svc;
       void _dirty;
       const isNew = !initialServices.find(s => s.id === svc.id);
+      let res;
       if (isNew) {
-        await supabase.from('services').insert(row);
+        res = await supabase.from('services').insert(row);
       } else {
-        await supabase.from('services').upsert(row);
+        res = await supabase.from('services').upsert(row);
       }
+      if (res.error) throw res.error;
       onRefresh();
       showToast('Serviço salvo!', 'ok');
-    } catch { showToast('Erro ao salvar.', 'err'); }
-    finally { setSaving(null); }
+    } catch (err: unknown) {
+      showToast(`Erro ao salvar: ${err instanceof Error ? err.message : 'Tente novamente.'}`, 'err');
+    } finally {
+      setSaving(null);
+    }
   };
 
   const handleDelete = async (id: string) => {
     if (!confirm('Excluir este serviço permanentemente?')) return;
-    await supabase.from('services').delete().eq('id', id);
-    setServices(prev => prev.filter(s => s.id !== id));
-    onRefresh();
-    showToast('Serviço excluído.', 'ok');
+    try {
+      const { error } = await supabase.from('services').delete().eq('id', id);
+      if (error) throw error;
+      setServices(prev => prev.filter(s => s.id !== id));
+      onRefresh();
+      showToast('Serviço excluído.', 'ok');
+    } catch (err: unknown) {
+      showToast(`Erro ao excluir: ${err instanceof Error ? err.message : 'Tente novamente.'}`, 'err');
+    }
   };
 
   const handleAdd = () => {
@@ -360,6 +381,10 @@ function HoursTab({ initialHours, onRefresh }: { initialHours: HourRow[]; onRefr
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState<{ msg: string; type: 'ok' | 'err' } | null>(null);
 
+  useEffect(() => {
+    setHours(initialHours);
+  }, [initialHours]);
+
   const showToast = (msg: string, type: 'ok' | 'err') => { setToast({ msg, type }); setTimeout(() => setToast(null), 3500); };
 
   const update = (id: string, field: keyof HourRow, val: unknown) =>
@@ -378,13 +403,18 @@ function HoursTab({ initialHours, onRefresh }: { initialHours: HourRow[]; onRefr
     setSaving(true);
     try {
       // Delete all and re-insert for simplicity
-      await supabase.from('opening_hours').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+      const delRes = await supabase.from('opening_hours').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+      if (delRes.error) throw delRes.error;
       const rows = hours.map(({ _dirty, ...h }) => { void _dirty; return h; });
-      await supabase.from('opening_hours').insert(rows);
+      const insRes = await supabase.from('opening_hours').insert(rows);
+      if (insRes.error) throw insRes.error;
       onRefresh();
       showToast('Horários salvos com sucesso!', 'ok');
-    } catch { showToast('Erro ao salvar horários.', 'err'); }
-    finally { setSaving(false); }
+    } catch (err: unknown) {
+      showToast(`Erro ao salvar: ${err instanceof Error ? err.message : 'Tente novamente.'}`, 'err');
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -436,32 +466,44 @@ function ContactTab({ settings, onRefresh }: { settings: SiteSettings; onRefresh
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState<{ msg: string; type: 'ok' | 'err' } | null>(null);
 
+  useEffect(() => {
+    setWa(settings.whatsapp_number);
+    setWaLabel(settings.whatsapp_label);
+    setIgHandle(settings.instagram_handle);
+    setIgUrl(settings.instagram_url);
+    setTagline(settings.footer_tagline);
+  }, [settings]);
+
   const showToast = (msg: string, type: 'ok' | 'err') => { setToast({ msg, type }); setTimeout(() => setToast(null), 3500); };
 
   const handleSave = async () => {
     setSaving(true);
     try {
-      await supabase.from('site_settings').upsert([
+      const { error } = await supabase.from('site_settings').upsert([
         { key: 'whatsapp_number', value: wa },
         { key: 'whatsapp_label', value: waLabel },
         { key: 'instagram_handle', value: igHandle },
         { key: 'instagram_url', value: igUrl },
         { key: 'footer_tagline', value: tagline },
       ]);
+      if (error) throw error;
       onRefresh();
       showToast('Contato e rodapé salvos!', 'ok');
-    } catch { showToast('Erro ao salvar.', 'err'); }
-    finally { setSaving(false); }
+    } catch (err: unknown) {
+      showToast(`Erro ao salvar: ${err instanceof Error ? err.message : 'Tente novamente.'}`, 'err');
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
       <h2 style={{ color: '#f5f0ea', fontSize: 22, fontFamily: 'Georgia, serif', margin: 0 }}>Contato & Rodapé</h2>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
-        <AdminInput label="Número WhatsApp (com DDI)" value={wa} onChange={setWa} placeholder="5566984165461" />
-        <AdminInput label="Exibição do número" value={waLabel} onChange={setWaLabel} placeholder="(66) 98416-5461" />
-        <AdminInput label="Instagram @handle" value={igHandle} onChange={setIgHandle} placeholder="@daianegomesstudio" />
-        <AdminInput label="URL do Instagram" value={igUrl} onChange={setIgUrl} placeholder="https://instagram.com/..." />
+        <AdminInput label="Número WhatsApp (com DDI)" value={wa} onChange={setWa} placeholder="5566997189721" />
+        <AdminInput label="Exibição do número" value={waLabel} onChange={setWaLabel} placeholder="(66) 99718-9721" />
+        <AdminInput label="Instagram @handle" value={igHandle} onChange={setIgHandle} placeholder="@daianegomes_micropigmentacao" />
+        <AdminInput label="URL do Instagram" value={igUrl} onChange={setIgUrl} placeholder="https://instagram.com/daianegomes_micropigmentacao" />
       </div>
       <AdminTextarea label="Texto do rodapé (tagline)" value={tagline} onChange={setTagline} rows={2} />
       <div><SaveBtn onClick={handleSave} saving={saving} /></div>
@@ -477,6 +519,10 @@ function GalleryTab({ settings, onRefresh }: { settings: SiteSettings; onRefresh
   const [uploading, setUploading] = useState(false);
   const [toast, setToast] = useState<{ msg: string; type: 'ok' | 'err' } | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setImages(settings.gallery_images || []);
+  }, [settings.gallery_images]);
 
   const showToast = (msg: string, type: 'ok' | 'err') => { setToast({ msg, type }); setTimeout(() => setToast(null), 3500); };
 
@@ -495,7 +541,7 @@ function GalleryTab({ settings, onRefresh }: { settings: SiteSettings; onRefresh
       }
       setImages(prev => [...prev, ...newUrls]);
       showToast('Imagens enviadas! Clique em Salvar para confirmar.', 'ok');
-    } catch (err: unknown) {
+    } catch {
       showToast(`Erro no upload.`, 'err');
     } finally {
       setUploading(false);
@@ -519,13 +565,14 @@ function GalleryTab({ settings, onRefresh }: { settings: SiteSettings; onRefresh
   const handleSave = async () => {
     setSaving(true);
     try {
-      await supabase.from('site_settings').upsert([
+      const { error } = await supabase.from('site_settings').upsert([
         { key: 'gallery_images', value: images.join(',') }
       ]);
+      if (error) throw error;
       onRefresh();
       showToast('Galeria salva com sucesso!', 'ok');
-    } catch {
-      showToast('Erro ao salvar galeria.', 'err');
+    } catch (err: unknown) {
+      showToast(`Erro ao salvar galeria: ${err instanceof Error ? err.message : 'Tente novamente.'}`, 'err');
     } finally {
       setSaving(false);
     }
@@ -591,11 +638,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
         supabase.from('opening_hours').select('*').order('sort_order'),
         supabase.from('site_settings').select('*'),
       ]);
-      const settings: SiteSettings = {
-        hero_title: '', hero_subtitle: '', hero_image_url: '',
-        whatsapp_number: '', whatsapp_label: '', instagram_handle: '',
-        instagram_url: '', footer_tagline: '', gallery_images: [],
-      };
+      const settings: SiteSettings = { ...DEFAULT_SETTINGS };
       for (const row of (stRes.data ?? []) as { key: string; value: string }[]) {
         if (row.key === 'gallery_images') {
           settings.gallery_images = row.value ? row.value.split(',') : [];

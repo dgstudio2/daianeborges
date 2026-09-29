@@ -108,10 +108,10 @@ VALUES
   ('hero_title',       'A harmonia e a elegância de traços desenhados para você.'),
   ('hero_subtitle',    'Realçamos sua beleza autêntica através da micropigmentação e estética facial de alto padrão, com resultados naturais e sofisticados.'),
   ('hero_image_url',   ''),
-  ('whatsapp_number',  '5566984165461'),
-  ('whatsapp_label',   '(66) 98416-5461'),
-  ('instagram_handle', '@daianegomesstudio'),
-  ('instagram_url',    'https://instagram.com/daianegomesstudio'),
+  ('whatsapp_number',  '5566997189721'),
+  ('whatsapp_label',   '(66) 99718-9721'),
+  ('instagram_handle', '@daianegomes_micropigmentacao'),
+  ('instagram_url',    'https://instagram.com/daianegomes_micropigmentacao'),
   ('footer_tagline',   'Micropigmentação e estética facial de alto padrão com exclusividade e sofisticação.')
 ON CONFLICT (key) DO NOTHING;
 
